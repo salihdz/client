@@ -87,7 +87,8 @@ echo "URL Server: $URL_SERVER"
 echo "Current path: $current_path"
 
 sudo apt update
-sudo apt install -y python3 python3-venv python3-dev
+sudo apt install python3 -y
+sudo apt install python3-pip -y
 sudo apt install -y build-essential
 sudo apt install -y cargo
 sudo apt install -y curl tmux git libssl-dev pkg-config
@@ -108,14 +109,14 @@ cargo build -p tig-worker --release
 # Install the benchmarker
 cd $current_path
 
-python3 -m venv venv
+rm /usr/lib/python3.12/EXTERNALLY-MANAGED
 
 mkdir -p tig-benchmarker
 cd tig-benchmarker
 wget https://raw.githubusercontent.com/tig-pool-nk/client/refs/heads/main/tig-benchmarker/slave.py -O slave.py
 wget https://raw.githubusercontent.com/tig-pool-nk/client/refs/heads/main/tig-benchmarker/requirements.txt -O requirements.txt
 cd $current_path
-./venv/bin/pip3 install -r tig-benchmarker/requirements.txt
+pip3 install -r tig-benchmarker/requirements.txt
 
 # Create a directory client_xnico_pool and navigate to it
 mkdir -p bin
